@@ -1,0 +1,92 @@
+/* General Layout */
+body {
+    background-color: #f0f2f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #1a73e8;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* Input Area */
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    resize: none;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    border-color: #1a73e8;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    background-color: #1a73e8;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #1557b0;
+}
+
+/* Result Box Dynamic States */
+#resultBox {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Novelty: Color Coding for Mental Health States */
+.stress-detected {
+    background-color: #fdecea;
+    color: #d93025;
+    border: 1px solid #f5c6cb;
+    animation: shake 0.5s; /* Visual cue for stress */
+}
+
+.no-stress {
+    background-color: #e6f4ea;
+    color: #1e8e3e;
+    border: 1px solid #c3e6cb;
+}
+
+/* Shake animation to emphasize stress detection */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}

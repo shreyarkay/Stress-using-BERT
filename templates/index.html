@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BERT Stress Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-2xl">
+        <h1 class="text-3xl font-bold text-gray-800 mb-4">Mental Health Stress Analyzer</h1>
+        <p class="text-gray-600 mb-6">Paste a Reddit post or blog text below to analyze for stress using BERT Transformers.</p>
+
+        <textarea id="userInput" class="w-full h-40 p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Type or paste content here..."></textarea>
+        
+        <button onclick="getPrediction()" class="mt-4 w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+            Analyze with BERT
+        </button>
+
+        <div id="resultBox" class="mt-8 hidden p-6 rounded-lg text-center font-bold text-xl">
+            <span id="predictionText"></span>
+        </div>
+    </div>
+
+    <script>
+        async function getPrediction() {
+            const text = document.getElementById('userInput').value;
+            const resultBox = document.getElementById('resultBox');
+            const predictionText = document.getElementById('predictionText');
+
+            if (!text.trim()) return alert("Please enter some text!");
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text })
+            });
+
+            const data = await response.json();
+            
+            resultBox.className = "mt-8 p-6 rounded-lg text-center font-bold text-xl";
+            
+            if (data.prediction === "Stress Detected") {
+                resultBox.classList.add("stress-detected");
+            } else {
+                resultBox.classList.add('no-stress');
+            }
+
+            predictionText.innerText = data.prediction;
+            resultBox.style.display = "block";
+        }
+    </script>
+</body>
+</html>
